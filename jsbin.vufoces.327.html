@@ -1,0 +1,679 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Data viz final project work-in-progress</title>
+   
+
+    <!-- Include Leaflet 1.2.0 Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.13/leaflet.draw.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.13/leaflet.draw.js"></script>
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://cartodb-libs.global.ssl.fastly.net/carto.js/v4.0.2/carto.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>  
+  
+  <!-- Include cartodb.js Library -->
+    <script src="https://cdn.rawgit.com/CartoDB/cartodb.js/@4.0.0-alpha.28/carto.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  
+<style id="jsbin-css">
+* {
+            
+margin: 0;        
+padding: 0;
+        }
+        
+html {
+            box-sizing: border-box;
+            height: 100%;
+        }
+        
+body {
+            background: #191919;
+            height: 100%;
+            font-family: "Open sans", Helvetica, Arial, sans-serif;
+        }
+
+
+
+#titletext {
+  position: relative;
+  left: 20px;
+  top: 20px;
+  display: inline;
+  font-size: 2.5em;
+  color: white;
+  /* font-family: "Arial"; */
+  
+  
+}
+
+
+#contacttext {
+  position: relative;
+  top: 9px;
+  left: 55px;
+  z-index: 999999;
+  display: inline;
+  font-size: 10px;
+  color: white;
+  font-family: "Lucida Console";
+  opacity: 0.8;
+  
+  
+}
+
+
+#container {
+            display: flex;
+            width: 100%;
+            height: 96%;
+            
+        }
+        
+#map {
+            flex: 2;
+            margin: 10px 35px 0px 0;
+            height: 90%;
+            top: 20px;
+            left: 10px;
+        }
+        
+#widgets {
+            display: flex;
+            position: relative;
+            top:5px;
+            width: 400px;
+            margin: 15px 10px 10px 0;
+            
+        }
+        .widget {
+            background: #191919;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+        .widget h1 {
+          color: #ffffff;  
+          font-size: 1.3em;
+          font-style: normal;
+          font-family: "Lucida Console";
+        }
+
+        .widget h3 {
+          color: #ffffff;  
+          font-size: 0.8em;
+          font-family: "Lucida Console";
+        }
+    
+        .widget-formula .result {
+          font-size: 3em;
+          color: #ffffff; 
+}
+
+.widget a {
+  color: white;
+  font-size:   12px;
+  opacity: 0.8;
+  text-align: justify;
+  font-family: "Lucida Console";
+}
+
+
+#myChartt{
+  position: relative;
+  left: 0%;
+  bottom: 0%;
+  opacity: 0.8;
+  color: white;
+  
+  
+}
+
+
+
+
+
+ul { 
+    display: block;
+    list-style-type: none;
+}
+
+
+
+
+#countriesWidget {
+        opacity: 0.5;
+        position: relative;
+        top: 0%;
+        left: 0%;
+        z-index: 999999;
+      }
+      .js-city-selector {
+        width: 150px;
+      }
+
+#risk_control {
+        color: white;
+        font-size: 12px;
+        z-index: 999999;
+        position: absolute;
+        bottom: 13vh;
+        right: 520px;
+        opacity: 0.5;
+        width: 100px;
+}
+
+
+#layer_selector {
+        position: absolute;
+        bottom: 13vh;
+        right: 450px;
+        padding:0;
+        width: 58px;
+        z-index: 999;
+        opacity: 0.5;
+      }
+ 
+      #layer_selector ul {
+        padding: 0; margin: 0;
+        list-style-type: none;
+      }
+ 
+      #layer_selector li {
+        border-bottom: 1px solid #999;
+        padding: 5px 5px;
+        font-family: "Helvetica", Arial;
+        font-size: 12px;
+        color: white;
+        cursor: auto;
+      }
+ 
+      #layer_selector li:hover {
+        background-color: #F0F0F0;
+        cursor: pointer;
+      }
+ 
+      #layer_selector li.selected {
+        background-color: #EEE;
+      }
+
+
+</style>
+</head>
+<body>
+  
+  <div id="titletext"> The Risk of Heat and Hot Water Problems in New York City  </div>
+  
+  <div id="container">
+    
+    
+    <div id="map"> 
+    <div id="contacttext"> ©Copyright B.Hong 2018 <br> boyeong.hong@nyu.edu  <br>
+ http://www.urbanintelligencelab.org/ </div>
+    </div>
+    
+  
+    
+    <div id="widgets">
+      <div id="avgPopulationWidget" class="widget widget-formula">
+        <h1> Potential heating risk </h1> <a>of 128,061 multi-unit residential buildings which are registered as multiple dwellings designated by the NYC Department of Housing Preservation and Development during the heating season (October 1st - May 31st), which is when building owners are required by law to provide adequate heat throughout the building</a><br>  
+                <p> <span class="js-average-population result">...</span> <font color="#ffffff"> <a>multiunit buildings </a></font> </p>
+        
+        
+        <!-- zipcode selector -->
+        <div id="countriesWidget" class="widget">
+          <h3>Enter zipcode</h3>
+     <input type="text" id="textbox" class="js-countries" > 
+     <input type="submit" value="Submit" /> </div>
+        
+        
+        
+        <!-- chart -->
+        <div id="myChartt">
+        <canvas id="myChart" height=250%></canvas> </div>  
+      
+        
+    
+        <!-- Select risk class   -->
+        
+        <div id="risk_control">
+            <ul>
+              <li onclick="setAll()">
+                <input type="radio" name="source" checked>
+                All
+              </li>
+              <li onclick="setHigh()">
+                <input type="radio" name="source" >
+                High risk
+              </li>
+              <li onclick="setMedium()">
+                <input type="radio" name="source">
+                Medium risk
+              </li>
+              <li onclick="setLow()">
+                <input type="radio" name="source">
+                Low risk
+              </li>
+            </ul>
+          </div>
+        
+        
+        <!-- layer selector -->
+        <div id="layer_selector" >
+      <ul>
+        <li onclick="alllayer()"  name="layer" >All</li>
+        <li onclick="ziplayer()"  name="layer">Zipcode</li>
+        <li onclick="bbllayer()"  name="layer">BBL</li>
+        
+      </ul>
+    </div>  
+        
+        
+            </div> 
+            
+        </div>
+    
+    
+    
+    
+  
+<script id="jsbin-javascript">
+var map = L.map('map', {drawControl: false}).setView([40.747276, -73.963261], 12);
+var drawnItems = new L.FeatureGroup();
+var drawControl = new L.Control.Draw({
+            
+  position: 'topleft',
+  draw: {
+                polygon: {
+                  allowIntersection: true,
+              shapeOptions: {
+                color: '#46945C'
+              }
+            },
+                polyline: false,
+                line: false,
+                marker: false,
+                rectangle: true,
+                circle: false,
+                circlemarker: false,
+            },
+            edit: {
+                featureGroup: drawnItems,
+                edit: false,
+                remove: false
+            }
+        });
+
+map.addControl(drawControl);
+map.addLayer(drawnItems);
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png',
+                              { maxZoom: 18, }).addTo(map);
+
+
+
+var client = new carto.Client({
+                    apiKey: 'NotNeeded',
+                    username: 'boyeonghong',
+                  });
+  
+var Dataset_zip = new carto.source.SQL(`
+    SELECT * FROM boyeonghong.data_zip_notnull
+`);
+
+
+var Dataset = new carto.source.SQL(`
+    SELECT * FROM boyeonghong.data_bbl
+    
+  `);
+
+var totalAmount = new carto.dataview.Formula(Dataset, 'risk', {
+            operation: carto.operation.COUNT
+        });
+
+// var avgRisk = new carto.dataview.Formula(Dataset, 'likelihood',{
+//           operation: carto.operation.AVG
+// });
+
+
+totalAmount.on('dataChanged', function (newData) {            
+var $widget = document.querySelector('#avgPopulationWidget');  
+var $totalAmount = $widget.querySelector('.js-average-population');
+$totalAmount.innerText = Math.round(newData.result);
+        });  
+
+
+
+
+client.addDataview(totalAmount);
+
+
+
+
+
+var categories = new carto.dataview.Category(Dataset, 'risk', {
+            operation: carto.operation.COUNT,
+            limit: 4,
+            operationColumn: 'risk'
+        });
+client.addDataview(categories);
+        
+var ctx = document.getElementById("myChart").getContext('2d');      
+var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [
+                  {
+                    label: '',
+                    data: [],//categories.categories.map(x => x.value),
+                    backgroundColor: [
+                      
+                     "lightgrey", //green
+                      "grey" ,
+                      "grey" , //red
+                    ],
+                    
+                    borderWidth: 1,
+                    
+                }, 
+                          ]
+            },
+  
+  
+ 
+  
+  
+  
+            options: {
+              legend: {
+        display: false
+    },
+              scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                          fontColor: "lightgrey"
+                        }
+                    }],
+                xAxes: [{
+                        ticks: {
+                           
+                          fontColor: "lightgrey"
+                        }
+                    }]
+                }
+            }
+        });
+        
+        categories.on('dataChanged', function (categories) {
+          //myChart.data.labels = ["low", "medium", "high"];
+          
+          myChart.data.labels = categories.categories.map(function (x) {return  x.name;}); 
+          
+//           myChart.data.datasets.forEach((dataset) => {
+//                 dataset.data = categories.categories.map(function (x) {return  x.value;  });
+          
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.data = categories.categories.map(function (x) {return  x.value;} );
+              
+            
+//               dataset.data = categories.categories.map(function (x) {if (x.name=='low') {return  x.value ;});
+            
+            
+            });
+            myChart.update();
+        });
+        
+
+
+let BBLStyle= new carto.style.CartoCSS(`
+    #layer {
+  polygon-fill: ramp([risk], (#07b925, #ffe600, #ff003c), ("Low", "Medium", "High"), "=");
+}
+#layer::outline {
+  line-width: 0;
+  line-color: #FFFFFF;
+  line-opacity: 0.5;
+}
+  `);
+
+let ZipStyle= new carto.style.CartoCSS(`
+    #layer {
+  polygon-fill: ramp([meanlikeli], (#1a9641, #a6d96a, #ffffbf, #fdae61, #d7191c), quantiles);
+  polygon-opacity: 0.2;
+}
+#layer::outline {
+  line-width: 0;
+  line-color: #FFFFFF;
+  line-opacity: 0.5;
+}
+  `);
+
+
+
+
+var cartoLayer_zip = new carto.layer.Layer(Dataset_zip, ZipStyle, {
+            featureOverColumns: ['zipcode', 'meanlikeli']
+        });
+//         client.addLayers([cartoLayer_zip]);
+//         client.getLeafletLayer().addTo(map);       
+
+
+var cartoLayer = new carto.layer.Layer(Dataset, BBLStyle, {
+            featureOverColumns: ['bbl', 'likelihood', 'risk', 'address', 'yearbuilt', 'bldgclass', 'com_1617', 'provio_161', 'unitsres', 'zipcode',]
+        });
+//         client.addLayers([cartoLayer]);
+//         client.getLeafletLayer().addTo(map);
+
+ client.addLayers([cartoLayer_zip, cartoLayer]);
+ client.getLeafletLayer().addTo(map);
+ 
+
+ 
+
+  
+
+
+
+
+
+/// -------- Layer selector ---------- /////
+cartoLayer_zip.hide()
+  
+
+function alllayer() {
+  cartoLayer_zip.show();
+  cartoLayer.show();
+}
+
+
+function ziplayer() {
+  
+  cartoLayer.hide();
+  catroLayer_zip.show();
+}
+
+function bbllayer() {
+  cartoLayer.show();
+  cartoLayer_zip.hide();
+  
+}
+
+
+
+
+
+/////-------- risk selector-------------////
+function setAll() {
+  Dataset.setQuery(`
+SELECT * FROM boyeonghong.data_bbl`);
+}
+
+
+function setHigh() {
+  Dataset.setQuery(`
+          SELECT *
+            FROM boyeonghong.data_bbl
+            WHERE risk ilike 'high'
+        `);
+}
+
+function setMedium() {
+  Dataset.setQuery(`
+          SELECT *
+            FROM boyeonghong.data_bbl
+            WHERE risk ilike 'medium'
+        `);
+}
+
+function setLow() {
+  Dataset.setQuery(`
+          SELECT *
+            FROM boyeonghong.data_bbl
+            WHERE risk ilike 'low'
+        `);
+}
+
+
+
+
+
+
+/////////////------------ click and show the information ----------//////////////////
+var popup = L.popup({closeButton: true, offset:[0,-20],autoPan:true});
+
+cartoLayer.on('featureClicked', function (featureEvent) {
+            
+            popup.setLatLng(featureEvent.latLng);
+            let bbl = featureEvent.data.bbl;
+            let likelihood = featureEvent.data.likelihood.toFixed(2);
+            let risk = featureEvent.data.risk;
+            let unitsres = featureEvent.data.unitsres;
+            let yearbuilt = featureEvent.data.yearbuilt;
+            let bldgclass = featureEvent.data.bldgclass;
+            let provio_161 = featureEvent.data.provio_161;
+            let com_1617 = featureEvent.data.com_1617;
+            let address = featureEvent.data.address;
+            let zipcode = featureEvent.data.zipcode;
+           popup.setContent(`
+            <b>BBL:</b> ${bbl} <br> 
+            <b>Likelihood:</b> ${likelihood} <br> 
+            <b>Risk:</b> ${risk} <br> 
+            <b>Building Class:</b> ${bldgclass} <br>
+            <b>#of units:</b> ${unitsres} <br>
+            <b>Built year:</b> ${yearbuilt} <br>
+            <b>Problems during 2016-2017 heating season:</b> ${provio_161} <br>
+            <b>311 Complaints during 2016-2017 heating season:</b> ${com_1617} <br>
+            <b>Address:</b> ${address} <br>
+            <b>Zipcode:</b> ${zipcode} <br>
+            `);
+  
+  
+           popup.openOn(map);
+           
+        });
+
+// cartoLayer.on(carto.layer.events.FEATURE_OUT, featureEvent => {
+//   popup.removeFrom(map);
+// });
+
+
+
+
+
+
+/////-------------- Draw polygon and box and show bbls within that boundary-----------///
+map.on(L.Draw.Event.CREATED, function (e) {          
+  var layer = e.layer;          
+  const query = `SELECT * FROM boyeonghong.data_bbl 
+                  WHERE St_Intersects(the_geom, St_SetSRID(St_GeomFromGeoJSON(
+                '${JSON.stringify(layer.toGeoJSON().geometry)}'), 4326))`;
+  Dataset.setQuery(query);
+            map.addLayer(layer);
+            map.on('click', function(){
+                map.removeLayer(layer) 
+                Dataset.setQuery('SELECT * FROM boyonghong.data_bbl');
+            });
+        });
+
+
+
+
+
+
+///// ---------- Enter zipcode and show bbls within the given zipcode ------------ /////
+const countriesDataview = new carto.dataview.Category(Dataset, 'zipcode',{
+            operation: carto.operation.COUNT,
+            limit: 4,
+            operationColumn: 'zipcode'
+        });
+
+countriesDataview.on('dataChanged', data => {
+  const countryNames = data.categories.map(category => category.name).sort();
+  refreshCountriesWidget(countryNames);
+});
+
+function refreshCountriesWidget(adminNames) {
+  const widgetDom = document.querySelector('#countriesWidget');
+  const countriesDom = widgetDom.querySelector('.js-countries');
+
+  countriesDom.onchange = event => {
+    const zipcode = event.target.value;
+    filterPopulatedPlacesByCountry(zipcode);
+  };
+
+  // Fill in the list of countries
+adminNames.forEach(zipcode => {
+    const option =   document.createElement('option');
+    option.innerHTML = zipcode;
+    option.value = zipcode;
+    countriesDom.appendChild(option);
+  });
+}
+
+countriesDataview.on('dataChanged', function (data) {
+  data = data.categories.map(function (category) { return category.name; }).sort();
+
+})
+
+function filterPopulatedPlacesByCountry(zipcode) {
+  let query = `
+    SELECT *
+      FROM boyeonghong.data_bbl
+      WHERE zipcode IN (SELECT zipcode FROM boyeonghong.data_bbl)
+  `;
+  if (zipcode) {
+    query = `
+      SELECT *
+        FROM boyeonghong.data_bbl
+        WHERE zipcode ='${zipcode}'
+    `;
+  }
+  Dataset.setQuery(query);
+}
+client.addDataview(countriesDataview);
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
