@@ -4,7 +4,7 @@
 Memebr : boyeong Hong, bh1555@nyu.edu
 
 
-![Alt text]('image.png')
+![Alt text]('01_banner_image_bh1555.png')
 
 ## 01 Objectives of the projects
 This project is based on the current project, "Predicting Heat and Hot water Problem risk of Multiunit builgins in New York City', of Urban Intelligence Lab. The main aim of this data visualization project is building interactive visualization tools including map and charts for users to play around and explore the heating risk issue and the regional characteristics. Brief context of the project is as followings.
