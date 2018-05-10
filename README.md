@@ -5,6 +5,9 @@ Memebr : boyeong Hong, bh1555@nyu.edu
 
 
 ![Alt text](01_banner_image_bh1555.png)
+Link to the visualization: http://bl.ocks.org/CUSP2015BO/raw/4972638584365fd5073c51c40b253825/
+ 
+
 
 ## 01 Objectives of the projects
 This project is based on the current project, "Predicting Heat and Hot water Problem risk of Multiunit builgins in New York City', of Urban Intelligence Lab. The main aim of this data visualization project is building interactive visualization tools including map and charts for users to play around and explore the heating risk issue and the regional characteristics. Brief context of the project is as followings.
@@ -28,8 +31,6 @@ Methodologies
 * Gradient Boosting Classifier algorithm is used to predict the likelihood of heat and hot water problems at the building-level across the city in 2016-2017 heating season
 * Training set: 2012-2016 heating season
 * Predictors: building physical condition, property characteristics, management structure, and building mechanical systems (e.g. boilers)
-
-
 
 ## 02 Data set involves
 As mentioned above, this visualization project is based on the result of the research project. Main data set is the likelihood of heat and hot water issues at the building level associated with Borough-Block-Lot, address, zipcode, building age, building class, the number of units, the number of heat and hot water related violations and problems (issued by NYC Depepartment of Housing Preservation and Development), and the number of heat and hot water related 311 complaints.
