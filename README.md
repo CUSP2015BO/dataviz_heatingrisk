@@ -1,7 +1,8 @@
 # Heating Risk Mapping Project
 ### Data Visualization 
 
-Memebr : boyeong Hong, bh1555@nyu.edu
+© boyeong Hong, bh1555@nyu.edu
+© UrbanIntelligenceLab
 
 
 ![Alt text](01_banner_image_bh1555.png)
