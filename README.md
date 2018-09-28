@@ -5,7 +5,7 @@
 © UrbanIntelligenceLab
 
 
-![Alt text](01_banner_image_bh1555.png)
+![Alt text](banner_image.png)
 * Link to the visualization: http://bl.ocks.org/CUSP2015BO/raw/32d115620dbd30618dfe70d445af9493/
 * Link to JSBin: https://jsbin.com/kayutaj/edit?html,css,js
 
