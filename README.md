@@ -6,8 +6,8 @@
 
 
 ![Alt text](01_banner_image_bh1555.png)
-* Link to the visualization: http://bl.ocks.org/CUSP2015BO/raw/4972638584365fd5073c51c40b253825/
-* Link to JSBin: http://jsbin.com/vufoces/327/edit?html,css,js 
+* Link to the visualization: http://bl.ocks.org/CUSP2015BO/raw/32d115620dbd30618dfe70d445af9493/
+* Link to JSBin: https://jsbin.com/kayutaj/edit?html,css,js
 
 
 ## 01 Objectives of the projects
